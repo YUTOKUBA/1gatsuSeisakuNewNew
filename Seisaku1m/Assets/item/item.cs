@@ -24,16 +24,16 @@ public class item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A)){
+        if(Input.GetKeyDown(KeyCode.JoystickButton0)){
             a = 1;
         }
-        if(Input.GetKeyDown(KeyCode.B)){
+        if(Input.GetKeyDown(KeyCode.JoystickButton1)){
             a = 2;
         }
-        if(Input.GetKeyDown(KeyCode.C)){
+        if(Input.GetKeyDown(KeyCode.JoystickButton3)){
             a = 3;
         }
-        if(Input.GetKeyDown(KeyCode.D)){
+        if(Input.GetKeyDown(KeyCode.JoystickButton2)){
             a = 4;
         }
         switch(a){
