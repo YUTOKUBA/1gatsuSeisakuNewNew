@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// バーチャルカメラを切り替えるサンプル
@@ -33,15 +34,15 @@ public class camera : MonoBehaviour
         }
     }
 
+    // フレーム更新
     private void Update()
     {
         // バーチャルカメラが設定されていなければ、何もしない
         if (_virtualCameraList == null || _virtualCameraList.Length <= 0)
             return;
 
-
         // マウスクリックされたら
-        if (Input.GetButtonDown("Horizontal"))
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             // 以前のバーチャルカメラを非選択
             var vCamPrev = _virtualCameraList[_currentCamera];
