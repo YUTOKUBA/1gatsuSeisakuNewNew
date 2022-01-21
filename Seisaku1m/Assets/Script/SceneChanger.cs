@@ -25,18 +25,10 @@ public class SceneChanger : MonoBehaviour
     public void OnEnd()
     {
         SceneManager.LoadScene("End");
-        StartCoroutine(Timer());
     }
 
     public void OnTitle()
     {
         SceneManager.LoadScene("Title");
-    }
-
-    private IEnumerator Timer()
-    {
-        yield return new WaitForSecondsRealtime(1.0f);
-
-        Application.Quit();
     }
 }
