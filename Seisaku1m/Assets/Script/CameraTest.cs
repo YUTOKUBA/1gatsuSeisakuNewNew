@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// バーチャルカメラを切り替えるサンプル
 /// </summary>
-public class camera : MonoBehaviour
+public class CameraTest : MonoBehaviour
 {
     // バーチャルカメラ一覧
     [SerializeField] private CinemachineVirtualCamera[] _virtualCameraList;
@@ -51,6 +51,20 @@ public class camera : MonoBehaviour
 
             // 追従対象を順番に切り替え
             if (++_currentCamera >= _virtualCameraList.Length)
+                _currentCamera = 0;
+
+            // 次のバーチャルカメラを選択
+            var vCamCurrent = _virtualCameraList[_currentCamera];
+            vCamCurrent.Priority = _selectedPriority;
+        }
+
+        if (Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            //var vCamPrev = _virtualCameraList[_currentCamera];
+            //vCamPrev.Priority = _unselectedPriority;
+
+            // 追従対象を順番に切り替え
+            if (--_currentCamera >= _virtualCameraList.Length)
                 _currentCamera = 0;
 
             // 次のバーチャルカメラを選択
