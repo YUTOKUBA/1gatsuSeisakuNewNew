@@ -7,25 +7,34 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
-    public Transform point;
+    public Transform[] points;
+    private int point = 0;
     [SerializeField] private Animator animator;
     private NavMeshAgent agent;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = point.position;
+
+        agent.autoBraking = false;
+        GotoNextPoint();
+    }
+    void GotoNextPoint()
+    {
+        if(points.Length == 0)
+        {
+            return;
+        }
+        agent.destination = points[point].position;
+        point = (point + 1) % points.Length;
     }
     void Update()
-    {
+    {   
         animator.SetFloat("speed", agent.velocity.magnitude);
-        
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Finish")
+        if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
-            animator.SetFloat("speed", -1);
+           
+                GotoNextPoint();
         }
     }
 }
