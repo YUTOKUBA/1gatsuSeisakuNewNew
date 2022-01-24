@@ -2,45 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Menu : MonoBehaviour
 {
-    //[SerializeField] private Button pauseButton;
-    [SerializeField] private GameObject pausePanel;
-    //[SerializeField] private Button resumeButton;
-    bool flg = false;
+    private
+    int i;
+    public RectTransform Menubur;
+    int Menu_Num = 0;
+    bool Push_flag = false;
+    int Event;
+    private bool inGame;
+
+
+    [SerializeField]
+    private GameObject EventSystems;
+
+    //　ポーズした時に表示するUI
+    [SerializeField]
+    private GameObject pauseUI;
+
+
+    public object Button1 { get; private set; }
+
+    // private void Start() {  }
 
     void Start()
     {
-        pausePanel.SetActive(false);
-        //pauseButton.onClick.AddListener(Pause);
-        //resumeButton.onClick.AddListener(Resume);
+        pauseUI.SetActive(false);
+        Invoke("Update", 4);
     }
+    // Update is called once per frame
+
 
     void Update()
     {
-        if(/*flg == false && */Input.GetKeyDown("joystick button 8"))
-        {
-            Pause();
-            flg = true;
-            Debug.Log("止まった");
-        }
-        if(flg == true && Input.GetKeyDown("joystick button 8"))
-        {
-            Resume();
-            flg = false;
-        }
-    }
 
-    private void Pause()
-    {
-        Time.timeScale = 0;  // 時間停止
-        pausePanel.SetActive(true);
-    }
+        if (Input.GetKeyDown("joystick button 7"))
 
-    private void Resume()
-    {
-        Time.timeScale = 1;  // 再開
-        pausePanel.SetActive(false);
+        {
+
+            pauseUI.SetActive(!pauseUI.activeSelf);
+            i = (i + 1) % 2;
+            if (pauseUI.activeSelf) { Time.timeScale = 0f; }
+            else { Time.timeScale = 1f; }
+        }
+
+
+
+        if (i == 1)
+        {
+            //　ポーズUIのアクティブ、非アクティブを切り替え
+            if (Input.GetKey(KeyCode.Alpha1)) { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+        }
     }
 }
