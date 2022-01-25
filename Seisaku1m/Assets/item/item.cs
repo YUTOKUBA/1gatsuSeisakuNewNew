@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class item : MonoBehaviour
 {
     public GameObject cam;
     public GameObject iphone;
+    public GameObject image;
+    public GameObject Panel;
 
     int a;
 
@@ -14,12 +17,22 @@ public class item : MonoBehaviour
     private float move_z = 4f;
 
     private float angle_x;
-    private float imove_x;
-    private float imove_y;
-    private float imove_z;
-    private float iangle_x;
-    private float iangle_y;
-    private float iangle_z;
+    private float imove_x, imove_y, imove_z;
+    private float iangle_x, iangle_y, iangle_z;
+
+    void Start(){
+        image = GameObject.Find("Image");
+        Panel = GameObject.Find("Panel");
+        Panel.GetComponent<Fade>().isFadeOut = false;
+        
+        // angle_x;
+        // imove_x;
+        // imove_y;
+        // imove_z;
+        // iangle_x;
+        // iangle_y;
+        // iangle_z;
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,9 +53,11 @@ public class item : MonoBehaviour
             //眠る
             case 1:
                 angle_x = -34.271f;
-
                 cam.transform.position = new Vector3(move_x, move_y, move_z);
                 cam.transform.rotation = Quaternion.Euler(angle_x,-180,0);
+
+                Panel.GetComponent<Fade>().isFadeOut = true;
+                image.GetComponent<cloase>().imageActive();
 
                 break;
             //すまほ

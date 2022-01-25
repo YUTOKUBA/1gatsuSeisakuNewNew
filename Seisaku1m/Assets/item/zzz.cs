@@ -25,7 +25,7 @@ public class zzz : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.G)){
             cam.transform.position = new Vector3(move_x, move_y, move_z);
             cam.transform.rotation = Quaternion.Euler(angle_x,-180,0);
-            Panel.GetComponent<Fade>().StartFadeOut();
+            Panel.GetComponent<Fade>().isFadeOut = true;
             image.GetComponent<cloase>().imageActive();
         }
     }
