@@ -57,7 +57,7 @@ public class item : MonoBehaviour
             a = 4;
             flag = true;
         }
-        if(flag == true){
+        //if(flag == true){
             switch(a){
                 //眠る
                 case 1:
@@ -65,9 +65,9 @@ public class item : MonoBehaviour
                     angle_x = -34.271f;
                     cam.transform.position = new Vector3(move_x, move_y, move_z);
                     cam.transform.rotation = Quaternion.Euler(angle_x,-180,0);
-
+                    time += Time.deltaTime;
                     if(time < sleeptime){
-                        time += Time.deltaTime;
+                        Debug.Log(time);
                         Panel.GetComponent<Fade>().isFadeOut = true;
                         image.GetComponent<cloase>().imageActive();
                         if(audioflag == false){
@@ -92,7 +92,7 @@ public class item : MonoBehaviour
                     break;
                 //すまほ
                 case 2:
-                    flag = false;
+                    //flag = false;
                     angle_x = 38.812f;
 
                     imove_x = -7.05f;
@@ -102,7 +102,7 @@ public class item : MonoBehaviour
                     iangle_y = 0.387f;
                     iangle_z = 0.189f;
 
-                    for(time = 0f;time < itime;){
+                    if(time < itime){
                         time += Time.deltaTime;
                         iphone.transform.position = new Vector3(imove_x,imove_y,imove_z);
                         iphone.transform.rotation = Quaternion.Euler(iangle_x,iangle_y,iangle_z);
@@ -113,7 +113,7 @@ public class item : MonoBehaviour
                     if(time >= itime){
                         time = 0f;
                         //初期値
-                        Initialize();
+                        //Initialize();
                         flag = true;
                     }
                     break;
@@ -129,7 +129,7 @@ public class item : MonoBehaviour
                     if(time >= gtime){
                         time = 0f;
                         //初期値
-                        Initialize();
+                        //Initialize();
                         flag = true;
                     }
 
@@ -146,12 +146,12 @@ public class item : MonoBehaviour
                     if(time >= mtime){
                         time = 0f;
                         //初期値
-                        Initialize();
+                        //Initialize();
                         flag = true;
                     }
                     break;
             }
-        }
+        //}
     }
 
     public void Initialize(){
