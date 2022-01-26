@@ -21,35 +21,39 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("joystick button 1")) {
-            for (timeCount = 0; timeCount < 600; timeCount++)
-            {
-                if (timeCount / 100 == 0)
-                {
-                    Totalscore += Ascore;
-                }
-                Debug.Log("10+");
-            }
+            InvokeRepeating(nameof(ScoreA), 1.0f, 1.0f);
+            CancelInvoke(nameof(ScoreB));
+            CancelInvoke(nameof(ScoreC));
         }
-        if (Input.GetKeyDown("joystick button 0")) {
-            for (timeCount = 0; timeCount < 600; timeCount++)
-            {
-                if (timeCount / 100 == 0)
+        if (Input.GetKeyDown("joystick button 0"))
+        {
+            InvokeRepeating(nameof(ScoreB), 1.0f, 1.0f);
+            CancelInvoke(nameof(ScoreA));
+            CancelInvoke(nameof(ScoreC));
 
-                    Totalscore += Bscore;
-                Debug.Log("50+");
-            }
         }
-        if (Input.GetKeyDown("joystick button 3")) {
-            for (timeCount = 0; timeCount < 600; timeCount++)
-            {
-                if (timeCount / 100 == 0)
-
-                    Totalscore += Cscore;
-                Debug.Log("100+");
-            }
+        if (Input.GetKeyDown("joystick button 3"))
+        {
+            InvokeRepeating(nameof(ScoreC), 1.0f, 1.0f);
+            CancelInvoke(nameof(ScoreB));
+            CancelInvoke(nameof(ScoreA));
         }
-
         textRezult.text = "Totalscore = " + Totalscore.ToString();
     }
 
+    void ScoreA()
+    {
+        Totalscore += Ascore;
+        Debug.Log("10+");
+    }
+    void ScoreB()
+    {
+        Totalscore += Bscore;
+        Debug.Log("50+");
+    }
+    void ScoreC()
+    {
+        Totalscore += Cscore;
+        Debug.Log("100+");
+    }
 }
