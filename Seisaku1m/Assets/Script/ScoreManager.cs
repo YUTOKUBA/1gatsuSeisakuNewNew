@@ -11,6 +11,7 @@ public class ScoreManager : MonoBehaviour
     public int Bscore = 50;
     public int Cscore = 100;
     public int Totalscore;
+    public int timeCount = 0;
 
     void Start()
     {
@@ -20,13 +21,32 @@ public class ScoreManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("joystick button 1")) {
-            Totalscore += Ascore * (int)(Time.deltaTime / 100f);
+            for (timeCount = 0; timeCount < 600; timeCount++)
+            {
+                if (timeCount / 100 == 0)
+                {
+                    Totalscore += Ascore;
+                }
+                Debug.Log("10+");
+            }
         }
         if (Input.GetKeyDown("joystick button 0")) {
-            Totalscore += Bscore * (int)(Time.deltaTime / 100f);
+            for (timeCount = 0; timeCount < 600; timeCount++)
+            {
+                if (timeCount / 100 == 0)
+
+                    Totalscore += Bscore;
+                Debug.Log("50+");
+            }
         }
         if (Input.GetKeyDown("joystick button 3")) {
-            Totalscore += Cscore * (int)(Time.deltaTime / 100f);
+            for (timeCount = 0; timeCount < 600; timeCount++)
+            {
+                if (timeCount / 100 == 0)
+
+                    Totalscore += Cscore;
+                Debug.Log("100+");
+            }
         }
 
         textRezult.text = "Totalscore = " + Totalscore.ToString();
