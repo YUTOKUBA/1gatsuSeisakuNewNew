@@ -7,7 +7,6 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
-    GameObject MecanimElizabethWarrenrigged1;
     public Transform[] points;
     NavMeshAgent agent;
     Animator animator;
@@ -15,17 +14,23 @@ public class NPC : MonoBehaviour
     int n = 0;
     int count = 0;
     int R;
+    bool flgA;
+    bool flgB;
+    bool flgC;
+    static bool GameOver = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-
         //agent.destination = points[0].position;
     }
 
     void Update()
     {
+        flgA = ScoreManager.flagA();
+        flgB = ScoreManager.flagB();
+        flgC = ScoreManager.flagC();
         animator.SetFloat("speed", agent.velocity.magnitude);
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
@@ -42,6 +47,14 @@ public class NPC : MonoBehaviour
                 agent.speed = 0f;
                 animator.SetInteger("param1", 1);
                 agent.updateRotation = false;
+                if (flgA == false && flgB == false && flgC == false)
+                {
+
+                }
+                else
+                {
+                    GameOver = true;
+                }
             }
             if (n == 1 && count == 0)
             {
@@ -68,6 +81,10 @@ public class NPC : MonoBehaviour
         R = Random.Range(8, 23);
         yield return new WaitForSeconds(R);
         agent.speed = 1.2f;
+    }
+    public static bool gameover()
+    {
+        return GameOver;
     }
 }
 

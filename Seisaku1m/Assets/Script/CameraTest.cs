@@ -19,6 +19,12 @@ public class CameraTest : MonoBehaviour
     // 選択中のバーチャルカメラのインデックス
     private int _currentCamera = 0;
 
+    public GameObject cam;
+
+    private void Start(){
+        cam = GameObject.Find("cam");
+    }
+
     // バーチャルカメラの優先度初期化
     private void Awake()
     {
@@ -41,9 +47,11 @@ public class CameraTest : MonoBehaviour
         if (_virtualCameraList == null || _virtualCameraList.Length <= 0)
             return;
 
+        //3
+        //if(cam.GetComponent<item>().flag == true){
         // 入力があれば
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        //if(GamePad.current.left.wasPressedThisFrame)
+        //if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Gamepad.current.rightShoulder.wasPressedThisFrame)
         {
             // 以前のバーチャルカメラを非選択
             var vCamPrev = _virtualCameraList[_currentCamera];
@@ -58,7 +66,9 @@ public class CameraTest : MonoBehaviour
             vCamCurrent.Priority = _selectedPriority;
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+
+        //if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
         {
             //var vCamPrev = _virtualCameraList[_currentCamera];
             //vCamPrev.Priority = _unselectedPriority;
@@ -71,5 +81,6 @@ public class CameraTest : MonoBehaviour
             var vCamCurrent = _virtualCameraList[_currentCamera];
             vCamCurrent.Priority = _selectedPriority;
         }
+        //}
     }
 }
