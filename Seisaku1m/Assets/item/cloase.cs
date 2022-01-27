@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class cloase : MonoBehaviour
 {
+    Image fadeImage;
+
+    void Start(){
+        fadeImage = GetComponent<Image> ();
+    }
     public void imageActive(){
-        gameObject.SetActive(true);
+        fadeImage.enabled = true;
     }
 
     public void imageHide(){
-        gameObject.SetActive(false);
+        fadeImage.enabled = false;
     }
 }
