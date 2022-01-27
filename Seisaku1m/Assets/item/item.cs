@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class item : MonoBehaviour
 {
     public GameObject cam;
     public GameObject iphone;
-    public GameObject image,game,net,inet;
+    public GameObject image,game,net,inet,camera;
     public GameObject Panel;
     public AudioClip sound1;
     AudioSource audioSource;
 
-    int a;
+    int a,savage;
     public float sleeptime = 5.0f;
-    public float itime = 3.0f;
+    public float itime = 60.0f;
     public float mtime = 6.0f;
     public float gtime = 10.0f;
     float time;
@@ -36,6 +37,7 @@ public class item : MonoBehaviour
         game = GameObject.Find("game");
         net = GameObject.Find("net");
         inet = GameObject.Find("inet");
+        camera = GameObject.Find("camera");
         Panel.GetComponent<Fade>().isFadeOut = false;
         audioSource = GetComponent<AudioSource>();
         Initialize();
@@ -44,24 +46,39 @@ public class item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.JoystickButton1)){
-            time = 0f;
-            a = 1;
-            flag = true;
+        if(flag == true){
+            if(Keyboard.current.spaceKey.wasPressedThisFrame){
+                savage++;
+            }
+            else if(Keyboard.current.enterKey.wasPressedThisFrame){
+                savage--;
+            }
+            if(savage >= 4){
+                savage = 0;
+            }
+            else if(savage < 0){
+                savage = 3;
+            }
         }
-        if(Input.GetKeyDown(KeyCode.JoystickButton0)){
-            time = 0f;
-            a = 2;
-            flag = true;
-        }
-        if(Input.GetKeyDown(KeyCode.JoystickButton2)){
+
+        if(savage == 0 && Keyboard.current.bKey.wasPressedThisFrame){
             time = 0f;
             a = 3;
             flag = true;
         }
-        if(Input.GetKeyDown(KeyCode.JoystickButton3)){
+        else if(savage == 1 && Keyboard.current.bKey.wasPressedThisFrame){
+            time = 0f;
+            a = 2;
+            flag = true;
+        }
+        else if(savage == 2 && Keyboard.current.bKey.wasPressedThisFrame){
             time = 0f;
             a = 4;
+            flag = true;
+        }
+        else if(savage == 3 && Keyboard.current.bKey.wasPressedThisFrame){
+            time = 0f;
+            a = 1;
             flag = true;
         }
 
@@ -75,7 +92,6 @@ public class item : MonoBehaviour
                     cam.transform.position = new Vector3(move_x, move_y, move_z);
                     cam.transform.rotation = Quaternion.Euler(angle_x,-180,0);
                     time += Time.deltaTime;
-                    Debug.Log(time);
                     if(flag == false){
                         if(time < sleeptime){
                             Panel.GetComponent<Fade>().isFadeOut = true;
@@ -108,14 +124,14 @@ public class item : MonoBehaviour
                     flag = false;
                     angle_x = 38.812f;
 
-                    imove_x = -7.05f;
-                    imove_y = 1.761f;
-                    imove_z = 3.421f;
-                    iangle_x = 58.21f;
-                    iangle_y = 0.387f;
-                    iangle_z = 0.189f;
+                    imove_x = -7.04f;
+                    imove_y = 2.295f;
+                    imove_z = 3.119f;
+                    iangle_x = 63.989f;
+                    iangle_y = 0.465f;
+                    iangle_z = 0.278f;
                     time += Time.deltaTime;
-                    Debug.Log(time);
+                    
 
                     if(time < itime){
                         iphone.transform.position = new Vector3(imove_x,imove_y,imove_z);
@@ -129,6 +145,15 @@ public class item : MonoBehaviour
                         //初期値
                         //Initialize();
                         flag = true;
+                        imove_x = -7.834f;
+                        imove_y = 2.063f;
+                        imove_z = 3.09f;
+                        iangle_x = 0f;
+                        iangle_y = 37.744f;
+                        iangle_z = 0f;
+                        iphone.transform.position = new Vector3(imove_x,imove_y,imove_z);
+                        iphone.transform.rotation = Quaternion.Euler(iangle_x,iangle_y,iangle_z);
+
                         inet.GetComponent<cloase>().imageHide();
                     }
                     break;
@@ -136,7 +161,7 @@ public class item : MonoBehaviour
                 case 3:
                     flag = false;
                     time += Time.deltaTime;
-                    Debug.Log(time);
+                    
                     if(time < gtime){
                         cam.transform.position = new Vector3(move_x, move_y, move_z);
                         cam.transform.rotation = Quaternion.Euler(-180,0,180);
@@ -155,7 +180,7 @@ public class item : MonoBehaviour
                 case 4:
                     flag = false;
                     time += Time.deltaTime;
-                    Debug.Log(time);
+                    
                     if(time < mtime){
                         net.GetComponent<cloase>().imageActive();
                         cam.transform.position = new Vector3(move_x, move_y, move_z);
