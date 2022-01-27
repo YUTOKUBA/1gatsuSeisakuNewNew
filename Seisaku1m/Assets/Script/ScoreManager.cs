@@ -38,7 +38,7 @@ public class ScoreManager : MonoBehaviour
             CancelInvoke(nameof(ScoreB));
             CancelInvoke(nameof(ScoreA));
         }
-        textRezult.text = "Totalscore = " + Totalscore.ToString();
+        textRezult.text = "Score:" + Totalscore.ToString();
     }
 
     void ScoreA()
