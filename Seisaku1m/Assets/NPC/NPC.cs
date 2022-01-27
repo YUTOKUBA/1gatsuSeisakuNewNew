@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
 public class NPC : MonoBehaviour
 {
+    [SerializeField]
     GameObject GameOverText;
     GameObject MecanimElizabethWarrenrigged1;
     public Transform[] points;
