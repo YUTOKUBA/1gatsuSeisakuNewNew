@@ -48,10 +48,10 @@ public class CameraTest : MonoBehaviour
             return;
 
         //3
-        if(cam.GetComponent<item>().flag == true){
+        //if(cam.GetComponent<item>().flag == true){
         // 入力があれば
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        //if(GamePad.current.left.wasPressedThisFrame)
+        //if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if(Gamepad.current.rightShoulder.wasPressedThisFrame)
         {
             // 以前のバーチャルカメラを非選択
             var vCamPrev = _virtualCameraList[_currentCamera];
@@ -65,9 +65,10 @@ public class CameraTest : MonoBehaviour
             var vCamCurrent = _virtualCameraList[_currentCamera];
             vCamCurrent.Priority = _selectedPriority;
         }
-        
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
+
+        //if (Keyboard.current.enterKey.wasPressedThisFrame)
+        if (Gamepad.current.leftShoulder.wasPressedThisFrame)
         {
             //var vCamPrev = _virtualCameraList[_currentCamera];
             //vCamPrev.Priority = _unselectedPriority;
@@ -80,6 +81,6 @@ public class CameraTest : MonoBehaviour
             var vCamCurrent = _virtualCameraList[_currentCamera];
             vCamCurrent.Priority = _selectedPriority;
         }
-        }
+        //}
     }
 }
