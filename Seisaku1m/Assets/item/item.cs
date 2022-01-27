@@ -7,7 +7,7 @@ public class item : MonoBehaviour
 {
     public GameObject cam;
     public GameObject iphone;
-    public GameObject image;
+    public GameObject image,game,net,inet;
     public GameObject Panel;
     public AudioClip sound1;
     AudioSource audioSource;
@@ -33,6 +33,9 @@ public class item : MonoBehaviour
         time = 0f;
         image = GameObject.Find("Image");
         Panel = GameObject.Find("Panel");
+        game = GameObject.Find("game");
+        net = GameObject.Find("net");
+        inet = GameObject.Find("inet");
         Panel.GetComponent<Fade>().isFadeOut = false;
         audioSource = GetComponent<AudioSource>();
         Initialize();
@@ -42,21 +45,27 @@ public class item : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.JoystickButton1)){
+            time = 0f;
             a = 1;
             flag = true;
         }
         if(Input.GetKeyDown(KeyCode.JoystickButton0)){
+            time = 0f;
             a = 2;
             flag = true;
         }
         if(Input.GetKeyDown(KeyCode.JoystickButton2)){
+            time = 0f;
             a = 3;
             flag = true;
         }
         if(Input.GetKeyDown(KeyCode.JoystickButton3)){
+            time = 0f;
             a = 4;
             flag = true;
         }
+
+        //選択中
         //if(flag == true){
             switch(a){
                 //眠る
@@ -66,18 +75,21 @@ public class item : MonoBehaviour
                     cam.transform.position = new Vector3(move_x, move_y, move_z);
                     cam.transform.rotation = Quaternion.Euler(angle_x,-180,0);
                     time += Time.deltaTime;
-                    if(time < sleeptime){
-                        Debug.Log(time);
-                        Panel.GetComponent<Fade>().isFadeOut = true;
-                        image.GetComponent<cloase>().imageActive();
-                        if(audioflag == false){
-                            audioSource.PlayOneShot(sound1);
-                            audioflag = true;
-                        }
-                        if(Panel.GetComponent<Fade>().alfa >= 1 ){
-                            Panel.GetComponent<Fade>().isFadeOut = false;
+                    Debug.Log(time);
+                    if(flag == false){
+                        if(time < sleeptime){
+                            Panel.GetComponent<Fade>().isFadeOut = true;
+                            image.GetComponent<cloase>().imageActive();
+                            if(audioflag == false){
+                                audioSource.PlayOneShot(sound1);
+                                audioflag = true;
+                            }
+                            if(Panel.GetComponent<Fade>().alfa >= 1 ){
+                                Panel.GetComponent<Fade>().isFadeOut = false;
+                            }
                         }
                     }
+
                     if(time >= sleeptime){
                         flag = true;
                         audioflag = false;
@@ -90,9 +102,10 @@ public class item : MonoBehaviour
                     }
 
                     break;
+
                 //すまほ
                 case 2:
-                    //flag = false;
+                    flag = false;
                     angle_x = 38.812f;
 
                     imove_x = -7.05f;
@@ -101,50 +114,56 @@ public class item : MonoBehaviour
                     iangle_x = 58.21f;
                     iangle_y = 0.387f;
                     iangle_z = 0.189f;
+                    time += Time.deltaTime;
+                    Debug.Log(time);
 
                     if(time < itime){
-                        time += Time.deltaTime;
                         iphone.transform.position = new Vector3(imove_x,imove_y,imove_z);
                         iphone.transform.rotation = Quaternion.Euler(iangle_x,iangle_y,iangle_z);
                         cam.transform.position = new Vector3(move_x, move_y, move_z);
                         cam.transform.rotation = Quaternion.Euler(angle_x,-180,0);
+                        inet.GetComponent<cloase>().imageActive();
                     }
 
                     if(time >= itime){
-                        time = 0f;
                         //初期値
                         //Initialize();
                         flag = true;
+                        inet.GetComponent<cloase>().imageHide();
                     }
                     break;
                 //ゲーム
                 case 3:
-                    flag = true;
+                    flag = false;
+                    time += Time.deltaTime;
+                    Debug.Log(time);
                     if(time < gtime){
-                        time += Time.deltaTime;
                         cam.transform.position = new Vector3(move_x, move_y, move_z);
                         cam.transform.rotation = Quaternion.Euler(-180,0,180);
+                        game.GetComponent<cloase>().imageActive();
                     }
 
                     if(time >= gtime){
-                        time = 0f;
                         //初期値
                         //Initialize();
                         flag = true;
+                        game.GetComponent<cloase>().imageHide();
                     }
 
                     break;
                 //ネット
                 case 4:
-                    flag = true;
+                    flag = false;
+                    time += Time.deltaTime;
+                    Debug.Log(time);
                     if(time < mtime){
-                        time += Time.deltaTime;
+                        net.GetComponent<cloase>().imageActive();
                         cam.transform.position = new Vector3(move_x, move_y, move_z);
                         cam.transform.rotation = Quaternion.Euler(-180,0,180);
                     }
 
                     if(time >= mtime){
-                        time = 0f;
+                        net.GetComponent<cloase>().imageHide();
                         //初期値
                         //Initialize();
                         flag = true;
