@@ -32,6 +32,8 @@ public class item : MonoBehaviour
 
     void Start(){
         time = 0f;
+        savage = 0;
+        flag = true;
         image = GameObject.Find("Image");
         Panel = GameObject.Find("Panel");
         game = GameObject.Find("game");
@@ -47,39 +49,42 @@ public class item : MonoBehaviour
     void Update()
     {
         if(flag == true){
-            if(Keyboard.current.spaceKey.wasPressedThisFrame){
+            if(Gamepad.current.rightShoulder.wasPressedThisFrame){
                 savage++;
             }
-            else if(Keyboard.current.enterKey.wasPressedThisFrame){
+            else if(Gamepad.current.leftShoulder.wasPressedThisFrame){
                 savage--;
             }
-            if(savage >= 4){
+            if(savage >= 6){
                 savage = 0;
             }
             else if(savage < 0){
-                savage = 3;
+                savage = 5;
             }
         }
 
-        if(savage == 0 && Keyboard.current.bKey.wasPressedThisFrame){
+        if(savage == 0 && Gamepad.current.buttonEast.wasPressedThisFrame){
             time = 0f;
             a = 3;
             flag = true;
         }
-        else if(savage == 1 && Keyboard.current.bKey.wasPressedThisFrame){
+        else if(savage == 1 && Gamepad.current.buttonEast.wasPressedThisFrame){
             time = 0f;
             a = 2;
             flag = true;
         }
-        else if(savage == 2 && Keyboard.current.bKey.wasPressedThisFrame){
+        else if(savage == 2 && Gamepad.current.buttonEast.wasPressedThisFrame){
             time = 0f;
             a = 4;
             flag = true;
         }
-        else if(savage == 3 && Keyboard.current.bKey.wasPressedThisFrame){
+        else if(savage == 3 && Gamepad.current.buttonEast.wasPressedThisFrame){
             time = 0f;
             a = 1;
             flag = true;
+        }
+        else if(savage == 4 && Gamepad.current.buttonEast.wasPressedThisFrame){
+            a = 5;
         }
 
         //選択中
@@ -193,6 +198,9 @@ public class item : MonoBehaviour
                         //Initialize();
                         flag = true;
                     }
+                    break;
+
+                case 5:
                     break;
             }
         //}

@@ -48,7 +48,7 @@ public class CameraTest : MonoBehaviour
             return;
 
         //3
-        //if(cam.GetComponent<item>().flag == true){
+        if(cam.GetComponent<item>().flag == true){
         // 入力があれば
         //if (Keyboard.current.spaceKey.wasPressedThisFrame)
         if(Gamepad.current.rightShoulder.wasPressedThisFrame)
@@ -81,6 +81,6 @@ public class CameraTest : MonoBehaviour
             var vCamCurrent = _virtualCameraList[_currentCamera];
             vCamCurrent.Priority = _selectedPriority;
         }
-        //}
+        }
     }
 }
