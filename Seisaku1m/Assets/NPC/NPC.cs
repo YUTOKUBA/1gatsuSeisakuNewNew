@@ -17,6 +17,7 @@ public class NPC : MonoBehaviour
     bool flgA;
     bool flgB;
     bool flgC;
+    bool flgD;
     static bool GameOver = false;
 
     void Start()
@@ -31,6 +32,7 @@ public class NPC : MonoBehaviour
         flgA = ScoreManager.flagA();
         flgB = ScoreManager.flagB();
         flgC = ScoreManager.flagC();
+        flgD = ScoreManager.flagD();
         animator.SetFloat("speed", agent.velocity.magnitude);
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
@@ -47,7 +49,7 @@ public class NPC : MonoBehaviour
                 agent.speed = 0f;
                 animator.SetInteger("param1", 1);
                 agent.updateRotation = false;
-                if (flgA == false && flgB == false && flgC == false)
+                if (flgA == false && flgB == false && flgC == false && flgD == false)
                 {
 
                 }
