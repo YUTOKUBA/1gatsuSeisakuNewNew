@@ -72,7 +72,7 @@ public class ScoreManager : MonoBehaviour
         {
             flgD = false;
         }
-        textRezult.text = "Totalscore = " + Totalscore.ToString();
+        textRezult.text = "Score = " + Totalscore.ToString();
     }
 
     void ScoreA()
